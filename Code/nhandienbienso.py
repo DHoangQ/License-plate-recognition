@@ -8,6 +8,7 @@ from keras.models import load_model
 
 
 def detect_license_plate(frame):
+    
     original_image = frame.copy()
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     blurred = cv2.GaussianBlur(gray, (5, 5), 0)
@@ -27,6 +28,7 @@ def detect_license_plate(frame):
     return original_image, license_plate
 
 def sort_characters(contours):
+    
     bounding_boxes = [cv2.boundingRect(cntr) for cntr in contours]
     def group_by_row(boxes, threshold=20):
         rows = []
@@ -93,6 +95,7 @@ def find_contours(dimensions, img):
 
 
 def segment_characters(image):
+    
     img_gray_lp = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     img_gray_lp = cv2.GaussianBlur(img_gray_lp,(5,5),0)
 
@@ -177,6 +180,7 @@ def capture_image():
 
 
 def start_camera():
+    
     global input_img_label, output_img_label, captured_license_plate
     cap = cv2.VideoCapture(0)
 
@@ -197,6 +201,7 @@ def start_camera():
         tk_frame = ImageTk.PhotoImage(pil_frame)
         input_img_label.config(image=tk_frame)
         input_img_label.image = tk_frame
+        
         if license_plate is not None:
             captured_license_plate = license_plate
             print('da luu')
